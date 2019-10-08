@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+
+}
+
+
+img{
+
+    width: 40%;
+    height: 40%;
+    
+}
+
+#rightPic{
+
+    margin-left: 5%;
+}
+
+#leftPic
+{
+    margin-right: 5%;
+
+    float: right;
+}
+
+html{
+    background-color: rgb(128, 158, 240);
+   
+    
+}
+
+.GreyBackground{
+
+    background-color: rgb(195, 197, 224);
+    
+    
+    margin: 100px;
+    margin-top: 30px;
+    
+}
+
+h2{
+    margin-left: 20px;
+    margin-top: 10px;
+    color: rgb(3, 25, 92);
+}
+
+p{
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+h3{
+    margin-left: 20px;
+    color: rgb(3, 25, 92);
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(42, 65, 190);
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+  }
+
+  li a:hover{
+    color: rgb(195, 197, 224);
+    
+
+  }
+
+  #descrip{
+      font-size: 20px;
+     
+  }
+
+  #AtariImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+  }
+
+ 
