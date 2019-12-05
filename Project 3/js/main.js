@@ -37,7 +37,7 @@ function setup() {
 
     player = new Player();
     platform = new Platform(0, 400, 500, 20, 0x000000);
-    platform2 = new Platform(400,320,20,100,0x000000);
+    platform2 = new Platform(400,370,20,50,0x000000);
     rects.push(platform2);
     ball = new Ball({ x: 0, y: 0 }, player.x, player.y);
     rects.push(platform);

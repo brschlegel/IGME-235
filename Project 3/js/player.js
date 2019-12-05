@@ -23,17 +23,13 @@ class Player extends PIXI.Sprite {
     update(rects, ballThrown) {
         colliding = false;
         let g = 5;
-        for (let r of rects) {
-            var ab = this.getBounds();
-            var bb = r.getBounds();
-            if (rectsIntersect(r, this)) {
-                colliding = true;
-                jumping = false;
-               
-            }
-
+        if(!checkingCollisionsY(player,5, rects))
+        {
+           colliding = true;
+           jumping = false;
 
         }
+       
         if (ballThrown) {
             this.keyboardControls(1 / 60, rects);
         }
@@ -50,34 +46,18 @@ class Player extends PIXI.Sprite {
     keyboardControls(dt = 1 / 60, rects) {
 
         if (keys[68]) {
-            let canMove = false
-            for (let r of rects) {
-                var ab = this.getBounds();
-                var bb = r.getBounds();
-                if (!rectsIntersect(r, this) && !(ab.x + ab.width > bb.x && ab.y + ab.height > bb.y)) {
-                    canMove = true;
-
-                }
-            }
-            if (canMove) {
+            if (checkingCollisionsX(player, this.speed * dt, rects)) {
                 this.x += this.speed * dt;
             }
 
         }
+        
 
+        
         if (keys[65]) {
-            let canMove = true
-            for (let r of rects) {
-                var ab = this.getBounds();
-                var bb = r.getBounds();
-                console.log(ab.y + ab.height);
-                
-                if (ab.x < bb.x + bb.width && ab.y + ab.height > bb.y) {
-                    canMove = false;
-
-                }
-            }
-            if (canMove) {
+            
+            
+            if (checkingCollisionsX(player, -this.speed * dt, rects)) {
                 this.x -= this.speed * dt;
             }
         }
@@ -116,4 +96,5 @@ function keysUp(e) {
 
     keys[e.keyCode] = false;
 }
+
 
