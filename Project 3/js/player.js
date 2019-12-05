@@ -24,9 +24,12 @@ class Player extends PIXI.Sprite {
         colliding = false;
         let g = 5;
         for (let r of rects) {
+            var ab = this.getBounds();
+            var bb = r.getBounds();
             if (rectsIntersect(r, this)) {
                 colliding = true;
                 jumping = false;
+               
             }
 
 
@@ -38,6 +41,8 @@ class Player extends PIXI.Sprite {
         if (!colliding) {
             this.y += 5;
         }
+
+        
 
 
     }
