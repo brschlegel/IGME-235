@@ -1,30 +1,3 @@
-class Player extends PIXI.Sprite{
-
-    constructor(x=0,y=0){
-        super(PIXI.loader.resources["images/Profile.jpg"].texture);
-        this.anchor.set(.5,.5);
-        this.scale.set(0.1);
-        this.x= x;
-        this.y = y;
-    }
-
-    update(rects)
-    {
-        let g = 5;
-        for(let r of rects)
-        {
-            if(!rectsIntersect(r,this))
-            {
-                this.y += g
-            }
-
-        }
-
-       
-
-    }
-}
-
 class Platform extends PIXI.Graphics{
     constructor(x,y,width,height,color = 0x46484a)
     {
@@ -36,4 +9,32 @@ class Platform extends PIXI.Graphics{
 
     }
 
+}
+
+class Ball extends PIXI.Graphics{
+    constructor(fwd,x=0,y=0,color=0xFF0000){
+        super();
+        this.beginFill(color);
+        this.drawCircle(0,0,2);
+        this.endFill();
+        this.fwd = fwd
+        this.speed = 50;
+        this.isAlive = true;
+        this.x = x;
+        this.y = y;
+        this.radius = 3;
+    }
+
+    move(dt = 1/60){
+        this.x += this.fwd.x * this.speed * dt;
+        this.y += this.fwd.y * this.speed * dt;
+    }
+
+    reflectX(){
+        this.fwd.x *= -1;
+    }
+
+    reflectY(){
+        this.fwd.y *= -1;
+    }
 }
