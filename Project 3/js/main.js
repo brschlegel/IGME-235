@@ -35,14 +35,22 @@ function setup() {
     gameScene = new PIXI.Container();
     stage.addChild(gameScene);
 
-    player = new Player();
-    platform = new Platform(0, 400, 500, 20, 0x000000);
-    platform2 = new Platform(400,370,20,50,0x000000);
-    rects.push(platform2);
+
+    //#region Borders
+    createPlatform(new Platform(0,0,20,600));
+    createPlatform(new Platform(980, 0, 20, 600));
+    createPlatform(new Platform(0,0,1000,20));
+    createPlatform(new Platform(0,580,1000,20));
+    //#endregion
+    player = new Player(50,50);
+    createPlatform(new Platform(0,400,500,20));
+    createPlatform(new Platform(0, 400, 500, 20, 0x000000));
+    createPlatform(new Platform(400,370,20,50,0x000000));
+    createPlatform(new Platform(600,500, 200, 20, 0x000000));
+   
     ball = new Ball({ x: 0, y: 0 }, player.x, player.y);
-    rects.push(platform);
-    app.stage.addChild(platform);
-    app.stage.addChild(platform2);
+    
+    
     app.stage.addChild(player);
     app.ticker.add(update);
 
@@ -55,7 +63,7 @@ function update() {
     let dt = 1 / app.ticker.FPS;
     if (dt > 1 / 12) dt = 1 / 12;
     player.update(rects,ballThrown);
-    ball.move();
+    ball.move(1/60, rects);
     if(ballThrown)
     {
         offsetTime += .1;
@@ -86,5 +94,11 @@ function catchBall() {
         ballThrown = false;
         app.stage.removeChild(ball);
     }
+
+}
+
+function createPlatform(p){
+    rects.push(p);
+    app.stage.addChild(p);
 
 }

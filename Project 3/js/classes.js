@@ -1,5 +1,5 @@
 class Platform extends PIXI.Graphics{
-    constructor(x,y,width,height,color = 0x46484a)
+    constructor(x,y,width,height,color = 0x000000)
     {
         super();
         this.beginFill(color);
@@ -18,16 +18,27 @@ class Ball extends PIXI.Graphics{
         this.drawCircle(0,0,2);
         this.endFill();
         this.fwd = fwd
-        this.speed = 50;
+        this.speed = 150;
         this.isAlive = true;
         this.x = x;
         this.y = y;
         this.radius = 3;
     }
 
-    move(dt = 1/60){
+    move(dt = 1/60, rects){
         this.x += this.fwd.x * this.speed * dt;
         this.y += this.fwd.y * this.speed * dt;
+        if(!checkingCollisionsX(this, this.fwd.x * this.speed * dt, rects))
+        {
+            this.reflectX();
+            
+        }
+
+        if(!checkingCollisionsY(this, this.fwd.y * this.speed * dt, rects))
+        {
+            this.reflectY();
+            
+        }
     }
 
     reflectX(){
