@@ -21,8 +21,11 @@ function checkingCollisionsX(player, potX, rects) {
         var ab = player.getBounds();
         var bb = r.getBounds();
         ab.x += potX;
+        
         if (ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height) {
+            r.activate();
             return false;
+            
         }
 
 

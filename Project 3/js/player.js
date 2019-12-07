@@ -78,7 +78,7 @@ class Player extends PIXI.Sprite {
             }
 
             if(checkingCollisionsY(player, -10*t, rects)){
-            this.y -= 10 * t;
+            this.y -= 12 * t;
             }
 
         }

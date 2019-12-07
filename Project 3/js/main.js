@@ -47,6 +47,7 @@ function setup() {
     createPlatform(new Platform(0, 400, 500, 20, 0x000000));
     createPlatform(new Platform(400,370,20,50,0x000000));
     createPlatform(new Platform(600,500, 200, 20, 0x000000));
+    createPlatform(new Button(960, 200,20,100, new Platform(200,200,30,30)));
    
     ball = new Ball({ x: 0, y: 0 }, player.x, player.y);
     
@@ -72,6 +73,7 @@ function update() {
     {
     catchBall();
     }
+   
 
 }
 
@@ -89,7 +91,7 @@ function throwBall(e) {
 }
 
 function catchBall() {
-    if(rectsIntersect(player, ball)){
+    if(rectsIntersect(player.getBounds(), ball.getBounds())){
        
         ballThrown = false;
         app.stage.removeChild(ball);

@@ -9,20 +9,26 @@ class Platform extends PIXI.Graphics{
 
     }
 
+    activate()
+    {
+
+    }
+
 }
 
 class Ball extends PIXI.Graphics{
     constructor(fwd,x=0,y=0,color=0xFF0000){
         super();
         this.beginFill(color);
-        this.drawCircle(0,0,2);
+        this.radius = 5;
+        this.drawCircle(0,0,this.radius);
         this.endFill();
         this.fwd = fwd
         this.speed = 150;
         this.isAlive = true;
         this.x = x;
         this.y = y;
-        this.radius = 3;
+        
     }
 
     move(dt = 1/60, rects){
@@ -47,5 +53,26 @@ class Ball extends PIXI.Graphics{
 
     reflectY(){
         this.fwd.y *= -1;
+    }
+}
+
+class Button extends PIXI.Graphics
+{
+    constructor(x,y,width,height,rect,color = 0xff615c)
+    {
+        super();
+        this.beginFill(color);
+        this.drawRect(x,y,width,height);
+        this.endFill();
+        this.rect = rect;
+    }
+
+   
+
+    activate()
+    {
+        
+        
+        createPlatform(this.rect);
     }
 }
