@@ -1,7 +1,5 @@
 //ripped this straight from circleBlast
 function rectsIntersect(ab, bb) {
-
-
     return ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height;
 }
 
@@ -21,19 +19,15 @@ function checkingCollisionsX(player, potX, rects) {
         var ab = player.getBounds();
         var bb = r.getBounds();
         ab.x += potX;
-        
+      
+
         if (ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height) {
-            r.activate();
+            r.activate(rects);
             return false;
-            
         }
-
-
     }
-    
+
     return true;
-
-
 }
 
 function checkingCollisionsY(player, potY, rects) {
@@ -43,13 +37,9 @@ function checkingCollisionsY(player, potY, rects) {
         var bb = r.getBounds();
         ab.y += potY;
         if (ab.x + ab.width > bb.x && ab.x < bb.x + bb.width && ab.y + ab.height > bb.y && ab.y < bb.y + bb.height) {
+            r.activate(rects);
             return false;
         }
-
-
     }
-    
     return true;
-
-
 }

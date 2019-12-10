@@ -13,7 +13,8 @@ class Player extends PIXI.Sprite {
         this.scale.set(0.1);
         this.x = x;
         this.y = y;
-        this.speed = 150;
+        this.speed = 300;
+        
         //keyboard event handlers
         window.addEventListener("keydown", keysDown);
         window.addEventListener("keyup", keysUp);
@@ -38,8 +39,8 @@ class Player extends PIXI.Sprite {
             this.y += 5;
         }
 
-        
-
+      
+  
 
     }
     //keycodes are W: 87, A: 65, S: 83, D: 68
@@ -82,7 +83,8 @@ class Player extends PIXI.Sprite {
             }
 
         }
-
+        
+      
     }
 
 
