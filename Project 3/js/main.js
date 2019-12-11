@@ -24,7 +24,12 @@ window.onload = function () {
     document.body.appendChild(app.view);
 
     app.renderer.plugins.interaction.on('pointerup', throwBall);
-    cIndex = 3;
+    if(localStorage.getItem("cIndex")){
+    cIndex = localStorage.getItem("cIndex") - 1;
+    }
+    else{
+        cIndex = 0;
+    }
     checkpoints = [];
     reloaded = true;
 }

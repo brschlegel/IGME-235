@@ -142,9 +142,10 @@ class Checkpoint extends PIXI.Graphics {
            
             rects.splice(rects.indexOf(this), 1)
             app.stage.removeChild(this);
-
+            cIndex++;
+            localStorage.setItem("cIndex", cIndex)
         }
-        cIndex++;
+      
         
     }
 
