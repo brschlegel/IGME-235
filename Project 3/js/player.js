@@ -5,6 +5,7 @@ let t;
 let jumping;
 jumping = false;
 let colliding = false;
+let offset = 0;
 class Player extends PIXI.Sprite {
 
     constructor(x = 0, y = 0) {
@@ -14,6 +15,7 @@ class Player extends PIXI.Sprite {
         this.x = x;
         this.y = y;
         this.speed = 300;
+        this.canScroll = false;
         
         //keyboard event handlers
         window.addEventListener("keydown", keysDown);
@@ -21,7 +23,7 @@ class Player extends PIXI.Sprite {
 
     }
 
-    update(rects, ballThrown) {
+    update(rects, ballThrown, canScroll, dt = 1/60) {
         colliding = false;
         let g = 5;
         if(!checkingCollisionsY(player,5, rects))
@@ -39,7 +41,11 @@ class Player extends PIXI.Sprite {
             this.y += 5;
         }
 
-      
+        if(keys[82])
+        {
+            window.location.reload();
+        }
+        
   
 
     }

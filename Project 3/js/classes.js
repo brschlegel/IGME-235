@@ -67,9 +67,11 @@ class SubtractiveButton extends PIXI.Graphics {
 
 
     activate(rects) {
-
+        while(rects.includes(this.rect))
+        {
         rects.splice(rects.indexOf(this.rect), 1)
         app.stage.removeChild(this.rect);
+        }
     }
 
     
@@ -89,6 +91,7 @@ class AdditiveButton extends PIXI.Graphics {
 
 
     activate(rects) {
+        
         createPlatform(this.rect);
 
     }
