@@ -1,12 +1,14 @@
 
-
+//variables and stuff
 let app;
 let rects = [];
 let ball;
 let ballThrown = false;
 let offsetTime;
-let controlsLabel, subButtonLabel, addButtonLabel, patienceLabel, checkpointLabel;
+let controlsLabel, subButtonLabel, addButtonLabel, patienceLabel, checkpointLabel, cameraLabel;
 let canScroll = false;
+let checkpointSound;
+//let keys = [];
 
 let checkpoints;
 let cIndex;
@@ -22,8 +24,11 @@ window.onload = function () {
         }
     );
     document.body.appendChild(app.view);
-
+    //ball throwing
     app.renderer.plugins.interaction.on('pointerup', throwBall);
+    //window.addEventListener("keydown", keysDown);
+    //window.addEventListener("keyup", keysUp);
+    //If never played the game, look at that you start from the center
     if(localStorage.getItem("cIndex")){
     cIndex = localStorage.getItem("cIndex") - 1;
     }
@@ -47,6 +52,8 @@ function setup() {
     stage = app.stage;
     setUpLabels();
 
+    //So each region represents a "floor"
+
     //#region Borders
     createPlatform(new Platform(0, 0, 20, 5000));
     createPlatform(new Platform(980, 0, 20, 5000));
@@ -69,7 +76,7 @@ function setup() {
     //#region 2
     createPlatform(new LabelButton(475, 800, 525, 20, addButtonLabel, 260,420));
     createPlatform(new Platform(455, 670, 20, 150));
-    createPlatform(new Platform(180, 650, 295, 20));
+    createPlatform(new LabelButton(180, 650, 295, 20, cameraLabel, 520,520));
     createPlatform(new AdditiveButton(150, 420, 100, 20, new Platform(600, 700, 75, 20)))
     createPlatform(new Checkpoint(20, 650, 160, 20,checkpoints))
     //#endregion
@@ -107,7 +114,9 @@ function setup() {
 
     ball = new Ball({ x: 0, y: 0 }, player.x, player.y);
 
-   
+    checkpointSound = new Howl({
+        src: ['sounds/checkpoint.wav']
+    });
     app.stage.addChild(player);
     app.ticker.add(update);
 
@@ -115,25 +124,30 @@ function setup() {
 
 
 function update() {
-    
-    //console.log(player.x);console.log(player.y);
-    
-
     let dt = 1 / app.ticker.FPS;
     if (dt > 1 / 12) dt = 1 / 12;
+
     player.update(rects, ballThrown);
     ball.move(1 / 60, rects);
     if (ballThrown) {
         offsetTime += .1;
     }
-    if (offsetTime > 3) {
+    if (offsetTime > 2) {
         catchBall();
     }
     if(!canScroll)
     {
     window.scrollTo(0,player.y - 400);
     }
-   
+    if(keys[67])
+    {
+        canScroll = true;
+    }
+    if(keys[88]){
+        canScroll = false;
+    }
+
+    
 
 }
 
@@ -188,6 +202,9 @@ function setUpLabels() {
     patienceLabel = new PIXI.Text("“He wins his battles by making no mistakes.” - Sun Tzu \n You have lost your battle. Press R to retry");
     patienceLabel.style = HelpStyle;
 
+    cameraLabel = new PIXI.Text("Press C to enable free camera.\nPress X to turn it back");
+    cameraLabel.style = HelpStyle;
+
     
 }
 
@@ -204,3 +221,17 @@ function getCenterOfWaypoint(waypoint)
     let bounds = waypoint
     return{x: 2 *bounds.x + bounds.width/2, y: 2 *bounds.y }
 }
+
+function keysDown(e) {
+
+    keys[e.keyCode] = true;
+
+}
+
+
+function keysUp(e) {
+
+    keys[e.keyCode] = false;
+}
+
+

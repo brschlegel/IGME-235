@@ -23,7 +23,7 @@ class Player extends PIXI.Sprite {
 
     }
 
-    update(rects, ballThrown, canScroll, dt = 1/60) {
+    update(rects, ballThrown, dt = 1/60) {
         colliding = false;
         let g = 5;
         if(!checkingCollisionsY(player,5, rects))
@@ -37,10 +37,12 @@ class Player extends PIXI.Sprite {
             this.keyboardControls(1 / 60, rects);
         }
 
+        //gravity!
         if (!colliding) {
             this.y += 5;
         }
 
+        //R key to reload the game
         if(keys[82])
         {
             window.location.reload();
@@ -69,6 +71,7 @@ class Player extends PIXI.Sprite {
             }
         }
 
+        //resets the timer if player isnt jumping
         if (!jumping) {
             t = 1;
         }
@@ -78,13 +81,13 @@ class Player extends PIXI.Sprite {
 
         }
         if (jumping) {
-
+            //gosh golly I love parabolas
             t -= dt;
             if (t < 0) {
                 t = 0;
             }
 
-            if(checkingCollisionsY(player, -10*t, rects)){
+            if(checkingCollisionsY(player, -12*t, rects)){
             this.y -= 12 * t;
             }
 

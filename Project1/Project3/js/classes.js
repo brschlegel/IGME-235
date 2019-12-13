@@ -16,6 +16,9 @@ class Platform extends PIXI.Graphics {
 
 }
 
+window.onload = function () {
+}
+
 class Ball extends PIXI.Graphics {
     constructor(fwd, x = 0, y = 0, color = 0xFF0000) {
         super();
@@ -54,6 +57,8 @@ class Ball extends PIXI.Graphics {
     }
 }
 
+//So the whole idea is that each of the Buttons are really just a special platform, so that they can all be stored together and updated together,
+//they handle their own actions so that you can have cool things like nested buttons
 class SubtractiveButton extends PIXI.Graphics {
     constructor(x, y, width, height, rect, color = 0xff615c) {
         super();
@@ -137,13 +142,15 @@ class Checkpoint extends PIXI.Graphics {
 
     }
 
-    activate(rects) {
+    activate(rects ) {
         if (!ballThrown) {
            
             rects.splice(rects.indexOf(this), 1)
             app.stage.removeChild(this);
             cIndex++;
-            localStorage.setItem("cIndex", cIndex)
+            //checkpoint system using local storage
+            localStorage.setItem("cIndex", cIndex);
+            checkpointSound.play();
         }
       
         
