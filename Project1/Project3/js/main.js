@@ -5,10 +5,10 @@ let rects = [];
 let ball;
 let ballThrown = false;
 let offsetTime;
-let controlsLabel, subButtonLabel, addButtonLabel, patienceLabel, checkpointLabel, cameraLabel;
+let controlsLabel, subButtonLabel, addButtonLabel, patienceLabel, checkpointLabel, cameraLabel, winLabel;
 let canScroll = false;
 let checkpointSound;
-//let keys = [];
+
 
 let checkpoints;
 let cIndex;
@@ -18,7 +18,7 @@ window.onload = function () {
 
         {
             width: 1000,
-            height: 5000,
+            height: 4020,
             backgroundColor: 0xAAAAAA
 
         }
@@ -26,8 +26,7 @@ window.onload = function () {
     document.body.appendChild(app.view);
     //ball throwing
     app.renderer.plugins.interaction.on('pointerup', throwBall);
-    //window.addEventListener("keydown", keysDown);
-    //window.addEventListener("keyup", keysUp);
+   
     //If never played the game, look at that you start from the center
     if(localStorage.getItem("cIndex")){
     cIndex = localStorage.getItem("cIndex") - 1;
@@ -55,10 +54,10 @@ function setup() {
     //So each region represents a "floor"
 
     //#region Borders
-    createPlatform(new Platform(0, 0, 20, 5000));
-    createPlatform(new Platform(980, 0, 20, 5000));
+    createPlatform(new Platform(0, 0, 20, 4000));
+    createPlatform(new Platform(980, 0, 20, 4000));
     createPlatform(new Platform(0, 0, 1000, 20));
-    createPlatform(new Platform(0, 4980, 1000, 20));
+    createPlatform(new LabelButton(0, 4000, 1000, 20, winLabel, 650,3800));
     //#endregion
 
 
@@ -106,12 +105,41 @@ function setup() {
     createPlatform(new Platform(800,1600,20,100));
     createPlatform(new Checkpoint(820,1600,160,20,checkpoints));
     createPlatform( new SubtractiveButton(960,1400,20,150,new AdditiveButton(220,1600,580,20,new Platform(580,1400,20,300))));
-  
+    //#endregion 5
+
+    //#region 6
+    createPlatform(new Platform(820,1800,180,20));
+    createPlatform(new Platform(800,1800,20,200));
+    createPlatform(new Platform(300,1980,500,20));
+    createPlatform(new Platform(300,1800,20,200))
+    createPlatform(new SubtractiveButton(780,1850,20,100,new Platform(500,1680,20,320)));
+    createPlatform(new AdditiveButton(20,1800,20,160, new Platform(300,1870,100,20)));
+    createPlatform(new Checkpoint(20,1980,280,20, checkpoints))
+    //#endregion 6 
+
+    //#region 7
+    createPlatform(new AdditiveButton(20,2400,280,20, new Platform(20,2300,280,20)));
+    createPlatform(new Platform(300,2000,20,320));
+    createPlatform(new Platform(300,2400,20,400));
+    let p = new Platform(500,2000,20,800);
+    createPlatform(p);
+    createPlatform(new AdditiveButton(320,2050,20,100,new SubtractiveButton(320,2600,20,200, p)));
+    createPlatform(new Platform(300,2800,600,20));
+    createPlatform(new Checkpoint(900,2800,80,20,checkpoints))
+    //#endregion 7
+    
+    //#region 8
+    createPlatform(new Platform(500,2800,20,1000));
+    createPlatform(new Platform(900,3000,20,800));
+    createPlatform(new SubtractiveButton(700,2820,50,20,new Platform(900,3000,80,20)));
+    createPlatform(new SubtractiveButton(520,2950,20,100,new Platform(900,3100,80,20)));
+    createPlatform(new SubtractiveButton(880,3150,20,100,new Platform(900,3200,80,20)));
+    createPlatform(new SubtractiveButton(520,3400,20,100,new Platform(900,3300,80,20)));
+    createPlatform(new SubtractiveButton(880,3600,20,100,new Platform(900,3400,80,20)));
 
 
+    //#endregion 8
     player = new Player(getCenterOfWaypoint(checkpoints[cIndex]).x, getCenterOfWaypoint(checkpoints[cIndex]).y, canScroll);
-
-
     ball = new Ball({ x: 0, y: 0 }, player.x, player.y);
 
     checkpointSound = new Howl({
@@ -204,6 +232,9 @@ function setUpLabels() {
 
     cameraLabel = new PIXI.Text("Press C to enable free camera.\nPress X to turn it back");
     cameraLabel.style = HelpStyle;
+
+    winLabel = new PIXI.Text("Hooray! You did it!")
+    winLabel.style = HelpStyle;
 
     
 }
