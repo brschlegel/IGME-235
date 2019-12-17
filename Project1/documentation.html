@@ -22,8 +22,33 @@
 </header>
 
 <body >
-    <p>To be implemented....</p>
-   
+    <div  class = "GreyBackground">
+    <h2>Controls</h2>
+    <p>The controls are displayed in an intuitive in-game tutorial, walking the player through step by step</p>
+    <p>WASD to move, Mouse click for throwing ball, C to enable free camera, X for fixed camera, R for restart, and L for full game restart</p>
+    <h2>Design Process</h2>
+    <h3>KeyLogging</h3>
+    <p>A basic game loop was set up, and key events were logged into an array and used in the update loop (see resources).</p>
+    <h3>Level Objects</h3>
+    <p>All of the platforms and different types of buttons or checkpoints are all stored into an array of rectangles. Each of the
+        classes has an activate method, which runs when the platform is collided with. This allowed me to call the activate methods when I check for collisions.
+        The methods for adding a platform to the screen as well as the methods for setting up activate calls were all written generally so that anything could be put into them. For 
+        example, an Additive Button can create Subtractive button, which could subtract a Label Button, or any other combination that the designer desires.
+    </p>
+    <h3>Collisions</h3>
+    <p>Since Brake Out is a platformer, simple bounding box intersection wouldn't work, I needed to know along what axis the collisions occur, As such 
+        collisions are handled by projecting a rectangle where the player is attempting to move, seperating the x and the y into two seperate checks, seeing if the projected rectangle intersects anything. The player is then moved in the 
+    x and y if their respective methods return true. </p>
+    <h3>Tutorial</h3>
+    <p>There is a hidden type of button in the game, the Label button. This button creates and displays a label, with tutorial text when the button is activated. I have the 
+        color of these buttons set to the same value as the platforms, allowing the tutorial to mesh with the game, and follow the player down the levels.
+    </p>
+
+    <h2>Resources</h2>
+    <p>Pixi.js is used to render everything, and the game logic is coded in Javascript.
+        The basic game loop came from the Circle Blast HW, and the Key logging technique I used is from Prof. Dower Chin's youtube tutorial series</p>
+
+   </div>
 </body>
 
 </html>

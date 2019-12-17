@@ -9,9 +9,9 @@ let offset = 0;
 class Player extends PIXI.Sprite {
 
     constructor(x = 0, y = 0) {
-        super(PIXI.loader.resources["images/Profile.jpg"].texture);
+        super(PIXI.loader.resources["images/Profile.png"].texture);
         this.anchor.set(.5, .5);
-        this.scale.set(0.1);
+        this.scale.set(0.05);
         this.x = x;
         this.y = y;
         this.speed = 300;

@@ -43,7 +43,7 @@ let player;
 
 let platform;
 
-PIXI.loader.add(["images/Profile.jpg"]).load(setup);
+PIXI.loader.add(["images/Profile.png"]).load(setup);
 
 
 function setup() {
@@ -174,6 +174,11 @@ function update() {
     if(keys[88]){
         canScroll = false;
     }
+    if(keys[76] && cIndex == 8){
+        localStorage.setItem("cIndex", 1);
+        window.location.reload();
+
+    }
 
     
 
@@ -233,7 +238,7 @@ function setUpLabels() {
     cameraLabel = new PIXI.Text("Press C to enable free camera.\nPress X to turn it back");
     cameraLabel.style = HelpStyle;
 
-    winLabel = new PIXI.Text("Hooray! You did it!")
+    winLabel = new PIXI.Text("Hooray! You did it!\n Press L to restart from floor one!");
     winLabel.style = HelpStyle;
 
     
